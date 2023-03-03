@@ -3,13 +3,31 @@ const stopBtn = document.querySelector('[data-stop]');
 const body = document.querySelector('body');
 
 let intervalId = null;
-startBtn.addEventListener('click', () => {
-    intervalId = setInterval(chengeBgColor, 1000);
-}, { once:true});
+// startBtn.addEventListener('click', (event) => {
+    
+//     intervalId = setInterval(chengeBgColor, 1000);
+//     event.target.disabled = true;
 
-stopBtn.addEventListener('click', () => { 
-    clearInterval(intervalId);
-})
+// });
+
+// stopBtn.addEventListener('click', (event) => { 
+//     console.log(event.targen); 
+//     clearInterval(intervalId);
+// })
+
+body.addEventListener('click', event => { 
+    console.log(event.target.textContent);
+    if (event.target.textContent === 'Start') {
+        intervalId = setInterval(chengeBgColor, 1000);
+        event.target.disabled = true;
+    } else {
+        clearInterval(intervalId);
+        console.dir(event.currentTarget.children[1].disabled = false);
+    }
+}
+
+    
+)
 
 function chengeBgColor() {
     body.style.backgroundColor = getRandomHexColor();
