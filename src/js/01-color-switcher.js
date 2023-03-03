@@ -5,7 +5,7 @@ const body = document.querySelector('body');
 let intervalId = null;
 startBtn.addEventListener('click', () => {
     intervalId = setInterval(chengeBgColor, 1000);
-});
+}, { once:true});
 
 stopBtn.addEventListener('click', () => { 
     clearInterval(intervalId);

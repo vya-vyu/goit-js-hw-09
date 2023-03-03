@@ -28,13 +28,14 @@ flatpickr('#datetime-picker', options);
 function setData(date) { 
     startTimerBtn.addEventListener('click', () => {
         // const linkHowmuchLeft = howMuchIsLeft(date);
-        setInterval(() => howMuchIsLeft(date), 1000);
+        const intervalId=setInterval(() => howMuchIsLeft(date,intervalId), 1000);
+        // setInterval(() => howMuchIsLeft(date), 1000);
         // howMuchIsLeft(date)
     })
    
 }
 
-function howMuchIsLeft(date) { 
+function howMuchIsLeft(date,interval) { 
     
     const currentDate = new Date();
     
@@ -48,6 +49,11 @@ function howMuchIsLeft(date) {
     }
 
     timerValue.forEach(el => {
+        
+        if (timeleft[el.nextElementSibling.textContent.toLowerCase()] === '-1') {
+            clearInterval(interval);
+            return;
+        }
         el.textContent = timeleft[el.nextElementSibling.textContent.toLowerCase()];
        
     });    
