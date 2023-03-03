@@ -5,7 +5,8 @@ import Notiflix from "notiflix";
 const startTimerBtn = document.querySelector('[data-start]');
 
 const timerValue = document.querySelectorAll('.value');
-
+let intervalId = null;
+console.log(intervalId);
 
 const options = {
   enableTime: true,
@@ -16,26 +17,31 @@ const options = {
         const currentDate = new Date();
         if (currentDate >= selectedDates[0]) {
             Notiflix.Notify.failure('Please choose a date in the future');
-        } else {
-            setData(selectedDates[0]);
-            Notiflix.Notify.success('Timer ON');
+            return;
+        }
+        if (!intervalId) {
+            startTimerBtn.addEventListener('click', () => {
+                if (!intervalId) { 
+                    Notiflix.Notify.success('Timer ON');
+                }
+                 setData(selectedDates[0]);  
+            })
+           
         }
   },
 };
 
 flatpickr('#datetime-picker', options);
 
-function setData(date) { 
-    startTimerBtn.addEventListener('click', () => {
-        // const linkHowmuchLeft = howMuchIsLeft(date);
-        const intervalId=setInterval(() => howMuchIsLeft(date,intervalId), 1000);
-        // setInterval(() => howMuchIsLeft(date), 1000);
-        // howMuchIsLeft(date)
-    })
+ 
+    function setData(date) { 
+        intervalId=setInterval(() => howMuchIsLeft(date), 1000);
+    }
+    
    
-}
 
-function howMuchIsLeft(date,interval) { 
+
+function howMuchIsLeft(date) { 
     
     const currentDate = new Date();
     
@@ -51,7 +57,7 @@ function howMuchIsLeft(date,interval) {
     timerValue.forEach(el => {
         
         if (timeleft[el.nextElementSibling.textContent.toLowerCase()] === '-1') {
-            clearInterval(interval);
+            clearInterval(intervalId);
             return;
         }
         el.textContent = timeleft[el.nextElementSibling.textContent.toLowerCase()];
