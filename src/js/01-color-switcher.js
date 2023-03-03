@@ -16,13 +16,13 @@ let intervalId = null;
 // })
 
 body.addEventListener('click', event => { 
-    console.log(event.target.textContent);
+    
     if (event.target.textContent === 'Start') {
         intervalId = setInterval(chengeBgColor, 1000);
         event.target.disabled = true;
     } else {
         clearInterval(intervalId);
-        console.dir(event.currentTarget.children[1].disabled = false);
+        event.currentTarget.children[1].disabled = false;
     }
 }
 
