@@ -11,8 +11,9 @@ form.addEventListener('submit', (event) => {
   formData.forEach((value, key) => {
     data[key] = Number(value);
   });
+
   let delay = data.delay;
-  console.log(data);
+
   for (let i = 0; i < data.amount; i += 1) { 
     
     showPromise(createPromise(i + 1, delay))
@@ -39,19 +40,19 @@ function createPromise(position, delay) {
     setTimeout(() => {
       const shouldResolve = Math.random() > 0.3;
       if (shouldResolve) {
-        // Fulfill
-        console.log(position)
+
         resolve({position,delay})
     
       } else {
-        // Reject
-        console.log(position)
+
         reject({position,delay})
         
       }
     },delay)
   })
+
   return promise
+  
 }
 
 
