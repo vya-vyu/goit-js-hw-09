@@ -7,29 +7,43 @@ const startTimerBtn = document.querySelector('[data-start]');
 const timerValue = document.querySelectorAll('.value');
 let intervalId = null;
 
-
+startTimerBtn.disabled = true;
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
-  minuteIncrement: 1,
+    minuteIncrement: 1,
+ 
+    onChange() { 
+        startTimerBtn.disabled = false;
+        if (intervalId) { 
+            Notiflix.Notify.warning('Reload the page to play the new timer')
+            startTimerBtn.disabled = true;
+        }
+    },
     onClose(selectedDates) {
         const currentDate = new Date();
-        if (currentDate >= selectedDates[0]) {
+        
+            if (currentDate >= selectedDates[0]) {
             Notiflix.Notify.failure('Please choose a date in the future');
+            startTimerBtn.disabled = true;
             return;
-        }
+            }
+        
         if (!intervalId) {
-            startTimerBtn.addEventListener('click', () => {
-                if (!intervalId) { 
+            startTimerBtn.addEventListener('click', (event) => {
                     Notiflix.Notify.success('Timer ON');
-                }else(Notiflix.Notify.warning('Timer already ON, reload the page to play the new timer'))
-                setData(selectedDates[0]); 
-            })
-           
+               
+                setData(selectedDates[0]);
+                startTimerBtn.disabled = true;
+            
+           })
         }
+    
   },
 };
+
+
 
 flatpickr('#datetime-picker', options);
 
