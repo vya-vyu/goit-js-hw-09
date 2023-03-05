@@ -19,33 +19,32 @@ const options = {
         if (intervalId) { 
             Notiflix.Notify.warning('Reload the page to play the new timer')
             startTimerBtn.disabled = true;
+            
         }
     },
     onClose(selectedDates) {
+       
         const currentDate = new Date();
         
-            if (currentDate >= selectedDates[0]&& startTimerBtn.disabled === false) {
+            if (currentDate >= selectedDates[0]) {
             Notiflix.Notify.failure('Please choose a date in the future');
-            startTimerBtn.disabled = true;
+            // startTimerBtn.disabled = true;
             return;
             }
-        
-        if (!intervalId) {
-            startTimerBtn.addEventListener('click', (event) => {
-                    Notiflix.Notify.success('Timer ON');
-               
-                setData(selectedDates[0]);
+        if (intervalId===null) {
+            startTimerBtn.addEventListener('click', () => {
+                Notiflix.Notify.success('Timer ON');
+                setData(selectedDates[0])
                 startTimerBtn.disabled = true;
-            
            })
         }
+        
     
   },
 };
 
 
 
-flatpickr('#datetime-picker', options);
 
  
     function setData(date) { 
@@ -105,3 +104,5 @@ function convertMs(ms) {
   
     return { days, hours, minutes, seconds };
 }
+
+flatpickr('#datetime-picker', options);
