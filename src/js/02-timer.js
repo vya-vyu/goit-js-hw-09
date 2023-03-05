@@ -69,10 +69,14 @@ function howMuchIsLeft(date) {
     }
 
     timerValue.forEach(el => {
-
+       
         if (Number(timeleft[el.nextElementSibling.textContent.toLowerCase()]) < 0) {
             clearInterval(intervalId);
+            if(el.dataset.seconds===''){ 
+                Notiflix.Notify.warning('Reload the page to play the new timer')
+            }
             return;
+            
         }
         el.textContent = timeleft[el.nextElementSibling.textContent.toLowerCase()];
        
