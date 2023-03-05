@@ -6,7 +6,7 @@ const startTimerBtn = document.querySelector('[data-start]');
 
 const timerValue = document.querySelectorAll('.value');
 let intervalId = null;
-console.log(intervalId);
+
 
 const options = {
   enableTime: true,
@@ -24,7 +24,7 @@ const options = {
                 if (!intervalId) { 
                     Notiflix.Notify.success('Timer ON');
                 }
-                 setData(selectedDates[0]);  
+                setData(selectedDates[0]); 
             })
            
         }
@@ -55,8 +55,8 @@ function howMuchIsLeft(date) {
     }
 
     timerValue.forEach(el => {
-        
-        if (timeleft[el.nextElementSibling.textContent.toLowerCase()] === '-1') {
+
+        if (Number(timeleft[el.nextElementSibling.textContent.toLowerCase()]) < 0) {
             clearInterval(intervalId);
             return;
         }
