@@ -23,7 +23,7 @@ const options = {
             startTimerBtn.addEventListener('click', () => {
                 if (!intervalId) { 
                     Notiflix.Notify.success('Timer ON');
-                }
+                }else(Notiflix.Notify.warning('Timer already ON, reload the page to play the new timer'))
                 setData(selectedDates[0]); 
             })
            
